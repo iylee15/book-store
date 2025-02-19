@@ -1,6 +1,6 @@
 package web.bookstore.dto;
 
-import jakarta.persistence.Column;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +18,7 @@ public class BookDto {
     private String author;
     private long price;
     private String publisher;
-    private LocalDate pubDate;
+    private String pubDate;
     private String description;
     private int stock;
     private String isbn;

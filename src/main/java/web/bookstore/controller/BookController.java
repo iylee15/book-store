@@ -10,6 +10,8 @@ import web.bookstore.domain.Book;
 import web.bookstore.dto.BookDto;
 import web.bookstore.service.BookService;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -25,7 +27,11 @@ public class BookController {
     public ResponseEntity<?> getBookList () {
         log.info("getBookList 호출");
         List<BookDto> result = bookService.getBookList().stream()
-                .map(data -> modelMapper.map(data, BookDto.class)).toList();
+                .map(data -> {
+                    BookDto bookDto = modelMapper.map(data, BookDto.class);
+                    bookDto.setPubDate(data.getPubDate().toString());
+                    return bookDto;
+                }).toList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -33,7 +39,9 @@ public class BookController {
     @GetMapping("/{id}")
     public ResponseEntity<?> getBookInfo (@PathVariable int id) {
         log.info("getBookInfo 호출");
-        BookDto result = modelMapper.map(bookService.getBookInfo(id), BookDto.class);
+        Book book = bookService.getBookInfo(id);
+        BookDto result = modelMapper.map(book, BookDto.class);
+        result.setPubDate(book.getPubDate().toString());
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
@@ -41,7 +49,11 @@ public class BookController {
     @PostMapping
     public ResponseEntity<?> addBook (@RequestBody BookDto book) {
         log.info("addBook 호출");
-        Book result = bookService.addBook(modelMapper.map(book, Book.class));
+        log.info("pubdate : {}", book.getPubDate());
+        LocalDate date = LocalDate.parse(book.getPubDate(), DateTimeFormatter.BASIC_ISO_DATE);
+        Book dbBook = modelMapper.map(book, Book.class);
+        dbBook.setPubDate(date);
+        Book result = bookService.addBook(dbBook);
         BookDto dto = modelMapper.map(result, BookDto.class);
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
