@@ -29,8 +29,10 @@ public class BookController {
         List<BookDto> result = bookService.getBookList().stream()
                 .map(data -> {
                     BookDto bookDto = modelMapper.map(data, BookDto.class);
-                    bookDto.setPubDate(data.getPubDate().toString());
-                    return bookDto;
+                    if(data.getPubDate() != null) {
+                        bookDto.setPubDate(data.getPubDate().toString());
+                        return bookDto;
+                    } return bookDto;
                 }).toList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

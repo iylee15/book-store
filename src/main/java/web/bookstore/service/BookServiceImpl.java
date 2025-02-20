@@ -2,7 +2,6 @@ package web.bookstore.service;
 
 import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.bookstore.domain.Book;
