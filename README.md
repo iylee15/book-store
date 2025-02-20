@@ -9,7 +9,7 @@
 - 1인 개발
 
 ## 💻 개발 환경
-- Front-end : Next.js
+- Front-end : Next.js, TypeScript
 - Back-end : Spring Boot
 
 ## 데이터베이스와 통신하는 API 설계 및 구현 내용  
