@@ -18,3 +18,8 @@
 - 책 정보 추가 (POST /api/books)
 - 책 정보 수정 (PUT api/books:id)
 - 책 정보 삭제 (DELETE /api/books/:id)
+
+### 사용 기술
+- JPA : DB 테이블과의 매칭을 용이하게 하기 위해 사용하였으며 객체 모델을 이용한 로직 구성에만 집중 가능합니다.
+- model mapper : Dto와 Entity의 필드 값 매핑을 짧은 코드로 구현하기 위해 사용하였습니다.
+- lombok : getter 및 setter 메소드의 간소화를 위해 사용하였습니다.
